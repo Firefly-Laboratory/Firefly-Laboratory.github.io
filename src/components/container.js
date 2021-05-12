@@ -1,8 +1,11 @@
-import React from "react"
+import React, { useState, useLayoutEffect } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { Link } from "gatsby"
 import { Layout, Menu } from "antd"
+import Toggle from './Toggle';
+import sun from '../assets/sun.png';
+import moon from '../assets/moon.png';
 const { Header, Footer, Content } = Layout
 
 const Container = ({ defKey, children }) => {
@@ -16,7 +19,15 @@ const Container = ({ defKey, children }) => {
     }
   `)
 
-  let headerColor = "rebeccapurple"
+  const [theme, setTheme] = useState(null);
+
+  useLayoutEffect(() => {
+    setTheme(window.__theme);
+    window.__onThemeChange = () => {
+      setTheme(window.__theme);
+    };
+  });
+
   return (
     <Layout>
       <Header
@@ -24,7 +35,6 @@ const Container = ({ defKey, children }) => {
           position: "fixed",
           zIndex: 1,
           width: "100%",
-          backgroundColor: headerColor,
         }}
       >
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
@@ -33,8 +43,42 @@ const Container = ({ defKey, children }) => {
               {data.site.siteMetadata.title}
             </Link>
           </h1>
+          <div style={{ float: "right", padding: "6px 0px 6px" }}>
+            {theme !== null ? (
+              <Toggle
+                icons={{
+                  checked: (
+                    <img
+                      src={moon}
+                      width="16"
+                      height="16"
+                      role="presentation"
+                      style={{ pointerEvents: 'none' }}
+                    />
+                  ),
+                  unchecked: (
+                    <img
+                      src={sun}
+                      width="16"
+                      height="16"
+                      role="presentation"
+                      style={{ pointerEvents: 'none' }}
+                    />
+                  ),
+                }}
+                checked={theme === 'dark'}
+                onChange={e =>
+                  window.__setPreferredTheme(
+                    e.target.checked ? 'dark' : 'light'
+                  )
+                }
+              />
+            ) : (
+              <div style={{ height: '24px' }} />
+            )}
+          </div>
           <Menu
-            style={{ backgroundColor: headerColor, float: "right" }}
+            style={{ float: "right" }}
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={defKey}
@@ -52,11 +96,10 @@ const Container = ({ defKey, children }) => {
         style={{
           padding: "24px 50px",
           marginTop: 64,
-          background: `#fff`,
           minHeight: "100vh", //edit this to change minimum page height
         }}
       >
-        <div style={{ maxWidth: "900px", margin: "0 auto" }}>{children}</div>
+        <div style={{ color: 'var(--textNormal)', background: 'var(--bg)', maxWidth: "900px", margin: "0 auto" }}>{children}</div>
       </Content>
       <Footer style={{ textAlign: "center" }}>
         © {new Date().getFullYear()} made by alienCY ^__^
