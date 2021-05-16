@@ -1,5 +1,3 @@
-const lessToJson = require('less-to-json'); 
-
 module.exports = {
   siteMetadata: {
     title: "Gatsby Ant Design Starter",
@@ -9,17 +7,11 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
-      resolve: 'gatsby-plugin-antd',
-      options: {
-        style: true
-      }
-    },
-    {
       resolve: "gatsby-plugin-less",
       options: {
         lessOptions: {
           javascriptEnabled: true,
-          modifyVars: lessToJson('src/theme/vars.less'),
+          modifyVars: {},
         }
       }
     },
