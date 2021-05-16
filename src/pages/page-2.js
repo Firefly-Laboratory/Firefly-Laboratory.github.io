@@ -1,12 +1,12 @@
 import React from "react"
-import Container from "../components/container"
+import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 import { Button } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 
 const SecondPage = () => (
-  <Container defKey="1">
+  <Layout defKey="page2">
     <SEO title="Page two" />
     <h1>Hi from the second page!</h1>
     <p>Welcome to page 2! <br/>
@@ -16,7 +16,7 @@ const SecondPage = () => (
       Example button from readme.md
    </Button>
    <p><br/>Check out that useful button!</p>
-  </Container>
+  </Layout>
 )
 
 export default SecondPage

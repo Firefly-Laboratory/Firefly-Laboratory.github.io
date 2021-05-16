@@ -1,0 +1,125 @@
+@header-height: 64px;
+@menu-item-border: 2px;
+@mobile-max-width: 767.99px;
+
+#header {
+  position: relative;
+  z-index: 10;
+  max-width: 100%;
+  background: @component-background;
+  box-shadow: 0 2px 8px rgba(240, 241, 242, 65);
+
+  // keep transition consistent to make mode toggle animation be more smooth, include:
+  // nav bar background
+  // nav menu background
+  &, #nav.ant-menu {
+    transition-duration: 0s;
+  }
+
+  .menu-row {
+    display: flex;
+    align-items: center;
+    margin: 0;
+
+    > * {
+      flex: none;
+      margin: 0 12px 0 0;
+
+      &:last-child {
+        margin-right: 40px;
+      }
+    }
+  }
+
+  // Buttons
+  .header-button {
+    color: @text-color;
+    border-color: @border-color-base;
+  }
+  .header-switch-button {
+    border-color: transparent;
+    display: flex;
+    align-items: center;
+  }
+  .header-white-space {
+    flex: 1;
+  }
+}
+
+#nav {
+  height: 100%;
+  font-size: 14px;
+  font-family: Avenir, @font-family, sans-serif;
+  border: 0;
+
+  &.ant-menu-horizontal {
+    border-bottom: none;
+
+    & > .ant-menu-item,
+    & > .ant-menu-submenu {
+      min-width: 40px;
+      height: @header-height;
+      margin-right: 12px;
+      margin-left: 12px;
+      line-height: @header-height - @menu-item-border - 2px;
+      border-top: @menu-item-border solid transparent;
+
+      &:hover {
+        border-top: @menu-item-border solid @primary-color;
+        border-bottom: @menu-item-border solid transparent;
+      }
+    }
+
+    & .ant-menu-submenu-title .anticon {
+      margin: 0;
+    }
+
+    & > .ant-menu-submenu-open {
+      border-top: @menu-item-border solid @primary-color;
+      border-bottom: @menu-item-border solid transparent;
+    }
+
+    & > .ant-menu-item-selected {
+      border-top: @menu-item-border solid @primary-color;
+      border-bottom: @menu-item-border solid transparent;
+      a {
+        color: @primary-color;
+      }
+    }
+  }
+
+  & > .ant-menu-item,
+  & > .ant-menu-submenu {
+    text-align: center;
+  }
+}
+
+#logo {
+  height: @header-height;
+  padding-left: 40px;
+  overflow: hidden;
+  color: @heading-color;
+  font-size: 18px;
+  font-family: Avenir, @font-family, sans-serif;
+  line-height: @header-height;
+  white-space: nowrap;
+  text-decoration: none;
+
+  img {
+    position: relative;
+    top: -1.5px;
+    height: 32px;
+    margin-right: 16px;
+  }
+}
+
+@media only screen and (max-width: @mobile-max-width) {
+  #header {
+    text-align: center;
+  }
+
+  #logo {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}

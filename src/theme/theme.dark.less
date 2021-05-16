@@ -5,8 +5,33 @@ body.dark {
 
   @import '~antd/lib/style/themes/default.less';
   @import '~antd/dist/antd.dark.less';
+  @import './layout.less';
 
   @body-background: #000220;
   @layout-body-background: #000220;
   @layout-header-background: #001529;
+
+  /* Change autocomplete styles in WebKit */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    border: 1px solid @border-color-base;
+    box-shadow: none;
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: @text-color;
+  }
+
+  #header {
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.65);
+  }
+
+  #logo img {
+    background-image: radial-gradient(#fff 0px, #141414 22px);
+  }
 }
