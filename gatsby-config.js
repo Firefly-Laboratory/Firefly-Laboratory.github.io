@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: "Gatsby Ant Design Starter",
-    description: `Kick off your next, great Gatsby project with this extra awesome ant design starter!`,
-    author: `@gatsbyjs + @alienCY`,
+    title: "Firefly Laboratory",
+    description: `Firefly Laboratory Blog Website`,
+    author: `Firefly Frontend Group`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
