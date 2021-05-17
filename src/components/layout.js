@@ -2,8 +2,9 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Layout as AntdLayout } from "antd"
 import Navigation from './navigation';
+import Footer from './footer';
 
-const { Header, Footer, Content } = AntdLayout
+const { Header, Footer: AntdFooter, Content } = AntdLayout
 
 const Layout = ({ defKey, children }) => {
   return (
@@ -28,9 +29,9 @@ const Layout = ({ defKey, children }) => {
       >
         <div style={{ color: 'var(--textNormal)', background: 'var(--bg)', maxWidth: "900px", margin: "0 auto" }}>{children}</div>
       </Content>
-      <Footer style={{ textAlign: "center" }}>
-        © {new Date().getFullYear()} made by alienCY ^__^
-      </Footer>
+      <AntdFooter className="main-footer-wrapper">
+        <Footer />
+      </AntdFooter>
     </AntdLayout>
   )
 }
