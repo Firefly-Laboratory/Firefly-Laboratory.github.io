@@ -34,10 +34,10 @@ const Navigation = ({ defKey }) => {
             <Link to="/">首页</Link>
           </Menu.Item>
           <Menu.Item key="articles">
-            <Link to="/articles/">文章</Link>
+            <Link to="/tags/articles/">文章</Link>
           </Menu.Item>
           <Menu.Item key="guides">
-            <Link to="/guides/">教程</Link>
+            <Link to="/tags/guides/">教程</Link>
           </Menu.Item>
         </Menu>
         <div className="header-white-space" />
