@@ -33,10 +33,10 @@ const Navigation = ({ defKey }) => {
           <Menu.Item key="home">
             <Link to="/">首页</Link>
           </Menu.Item>
-          <Menu.Item key="articles">
+          <Menu.Item key="Articles">
             <Link to="/tags/articles/">文章</Link>
           </Menu.Item>
-          <Menu.Item key="guides">
+          <Menu.Item key="Guides">
             <Link to="/tags/guides/">教程</Link>
           </Menu.Item>
         </Menu>

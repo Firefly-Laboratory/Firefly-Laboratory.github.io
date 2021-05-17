@@ -6,7 +6,7 @@ import PostCard from '../components/post-card'
 
 const IndexPage = ({ data }) => (
   <Layout defKey="home">
-    <SEO title="Home" />
+    <SEO title="首页" />
     <div className="container">
       <div className="f-article-highlights article--grid__container">
         {data.allMarkdownRemark.edges.map(({ node }) => (

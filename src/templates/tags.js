@@ -1,30 +1,25 @@
 import React from "react"
 import PropTypes from "prop-types"
 // Components
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import Layout from "../components/layout"
+import SEO from "../components/seo"
+import PostCard from '../components/post-card'
 
 const Tags = ({ pageContext, data }) => {
   const { tag } = pageContext
-  const { edges, totalCount } = data.allMarkdownRemark
-  const tagHeader = `${totalCount} post${
-    totalCount === 1 ? "" : "s"
-    } tagged with "${tag}"`
+  const { totalCount } = data.allMarkdownRemark
+  const tagHeader = `有 ${totalCount} 篇文章收录于 "${tag}"`
   return (
-    <Layout>
-      <div>
-        <h1>{tagHeader}</h1>
-        <ul>
-          {edges.map(({ node }) => {
-            const { slug } = node.fields
-            const { title } = node.frontmatter
-            return (
-              <li key={slug}>
-                <Link to={slug}>{title}</Link>
-              </li>
-            )
-          })}
-        </ul>
+    <Layout defKey={tag}>
+      <SEO title={tag} />
+      <div className="container">
+        <h1 className="tag-info light-grey" style={{ fontSize: 12, textAlign: "center", marginBottom: 16 }}>{tagHeader}</h1>
+        <div className="f-article-highlights article--grid__container">
+          {data.allMarkdownRemark.edges.map(({ node }) => (
+            <PostCard key={node.id} node={node} />
+          ))}
+        </div>
       </div>
     </Layout>
   )
@@ -36,18 +31,7 @@ Tags.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
       totalCount: PropTypes.number.isRequired,
-      edges: PropTypes.arrayOf(
-        PropTypes.shape({
-          node: PropTypes.shape({
-            frontmatter: PropTypes.shape({
-              title: PropTypes.string.isRequired,
-            }),
-            fields: PropTypes.shape({
-              slug: PropTypes.string.isRequired,
-            }),
-          }),
-        }).isRequired
-      ),
+      edges: PropTypes.array.isRequired,
     }),
   }),
 }
@@ -64,12 +48,16 @@ export const pageQuery = graphql`
       totalCount
       edges {
         node {
+          id
           fields {
             slug
           }
           frontmatter {
             title
+            date(formatString: "YYYY-MM-DD")
+            tags
           }
+          excerpt
         }
       }
     }
