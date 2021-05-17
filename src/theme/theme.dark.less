@@ -1,15 +1,16 @@
 
 body.dark {
-  --bg: #000220;
+  --bg: #333;
   --textNormal: rgba(255, 255, 255, 0.88);
 
   @import '~antd/lib/style/themes/default.less';
   @import '~antd/dist/antd.dark.less';
   @import './layout.less';
 
-  @body-background: #000220;
-  @layout-body-background: #000220;
+  @body-background: #333;
+  @layout-body-background: #333;
   @layout-header-background: #001529;
+  @component-background: #202020;
 
   /* Change autocomplete styles in WebKit */
   input:-webkit-autofill,
@@ -32,6 +33,6 @@ body.dark {
   }
 
   #logo img {
-    background-image: radial-gradient(#e3c363 0px, #141414 22px);
+    background-image: radial-gradient(#e3c363 0px, #202020 22px);
   }
 }
