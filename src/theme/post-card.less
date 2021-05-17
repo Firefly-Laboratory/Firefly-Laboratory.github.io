@@ -1,0 +1,454 @@
+
+.article--grid__container {
+  display: flex;
+  flex-wrap: wrap
+}
+
+.article--grid__container:after, .article--grid__container:before {
+  content: ' ';
+  display: table;
+  clear: both
+}
+
+.f-article-highlights {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.f-article-highlights__person {
+  margin-bottom: 3em;
+}
+
+.f-article-item {
+  flex-basis: 100%;
+}
+
+@media screen and (min-width: 64rem) {
+  .f-article-item {
+    flex-basis: 50%;
+  }
+}
+
+.f-article-item .article--post__content {
+  width: 90%;
+}
+
+.f-article-item .article--post {
+  margin: 2em 0;
+}
+
+@media screen and (min-width: 64rem) {
+  .f-article-item .article--post {
+    margin: 3em 0;
+  }
+}
+
+.f-article-item:nth-child(1) .article--post, .f-article-item:nth-child(2) .article--post {
+  margin-top: 0;
+}
+
+
+.article--post {
+  padding-left: 5em;
+  margin: 4.5em 0;
+}
+
+.article--post:after, .article--post:before {
+  content: ' ';
+  display: table;
+  clear: both;
+}
+
+@media (max-width: 64em) {
+  .article--post {
+    padding-left: 4.5em;
+  }
+}
+
+@media (max-width: 40em) {
+  .article--post {
+    padding-left: 0;
+    padding-top: 1.5em;
+    margin: 2.5em 0;
+  }
+
+  .article--post:first-child {
+    margin: 1em 0;
+  }
+}
+
+.article--post header {
+  clear: both;
+}
+
+.article--post header:after, .article--post header:before {
+  content: ' ';
+  display: table;
+  clear: both;
+}
+
+.article--post .article--post__teaser, .article--post .article--post__teaser + p {
+  display: inline;
+}
+
+.popular_articles--first .article--post {
+  margin-top: 1.25em;
+  margin-bottom: 0;
+}
+
+@media all and (min-width: 1025px) {
+  .popular_articles--first .article--post {
+    margin-top: 0;
+  }
+}
+
+.article--post__time {
+  font-size: .9em;
+  color: #666;
+  text-transform: lowercase;
+  font-feature-settings: 'smcp' 1,'c2sc' 1;
+  letter-spacing: 1px;
+  font-variant: petite-caps;
+  text-transform: lowercase;
+  background-position: center 72%;
+  font-family: -apple-system,Arial,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Ubuntu,Cantarell,sans-serif;
+}
+
+.article--post__title {
+  color: var(--textNormal);
+  font-size: calc(18px + 1vw);
+  max-width: 90%;
+  margin: calc(-2em + 1.5vw) 0 .5em;
+  line-height: 1.2;
+}
+
+@media screen and (min-width: 64em) {
+  .article--post__title {
+    margin-top: calc(-2em + 1.75vw);
+  }
+}
+
+.search-post-container .article--post__title {
+  margin-top: .5em;
+}
+
+@media (max-width: 40em) {
+  .article--post__title {
+    margin-top: .75em;
+  }
+}
+
+.article--post__title a {
+  color: var(--textNormal);
+  text-decoration: none;
+  transition: color .1s linear;
+  padding: 0;
+}
+
+.article--post__title a:focus, .article--post__title a:hover {
+  color: @primary-color;
+}
+
+@media (max-width: 40em) {
+  .article--post__title {
+    clear: both;
+  }
+}
+
+.article--post__meta {
+  margin-top: 1em;
+  padding-left: calc(.7em + .5em);
+  background-size: auto .8em;
+  background-repeat: no-repeat;
+  background-position: 0 .4em;
+}
+
+.article--post__content {
+  width: 70%;
+  float: left;
+  font-size: 1em;
+}
+
+.article--post__content p {
+  margin: 0
+}
+
+@media all and (max-width: 980px) {
+  .article--post__content {
+    width: 100%;
+    float: none
+  }
+}
+
+.article--post__image {
+  float: left;
+  margin-left: 0;
+  margin-right: .45em;
+  width: 5rem;
+  height: 5rem;
+  border-radius: .694rem;
+}
+
+@media screen and (min-width: 40em) {
+  .article--post__image {
+    margin-left: -5em;
+    margin-right: .85em;
+  }
+}
+
+.article--post__author-name {
+  color: #666;
+  font-weight: 700;
+  font-size: calc(.9em + .1vw);
+  font-family: -apple-system, Arial, BlinkMacSystemFont, Roboto Slab, Droid Serif, Segoe UI, Ubuntu, Cantarell, Georgia, serif;
+}
+
+.article--post__author-name span {
+  font-style: italic;
+  font-weight: 400;
+  font-family: -apple-system, Arial, BlinkMacSystemFont, Roboto Slab, Droid Serif, Segoe UI, Ubuntu, Cantarell, sans-serif;
+}
+
+.wf-loaded-stage2 .article--post__author-name span {
+  font-family: Elena;
+}
+
+.article--post__author-name em {
+  font-family: -apple-system, Arial, BlinkMacSystemFont, Roboto Slab, Droid Serif, Segoe UI, Ubuntu, Cantarell, sans-serif;
+}
+
+.wf-loaded-stage2 .article--post__author-name em {
+  font-family: Elena;
+}
+
+@media (max-width: 40em) {
+  .article--post__author-name {
+    position: relative;
+    top: 1.1em;
+  }
+}
+
+.article--post__stats {
+  float: right;
+  width: 24%;
+  font-size: .9em;
+}
+
+.article--post__stats ul {
+  list-style: none;
+  padding: 0;
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.article--post__stats ul li::before {
+  display: none;
+}
+
+.article--post__stats ul li {
+  padding-left: 1.5em;
+  margin: .1em 0;
+  color: #666;
+  background-repeat: no-repeat;
+  background-size: 1em 1em;
+  background-position: left center;
+}
+
+.article--post__stats ul li.article--post__comments-count a {
+  color: #666;
+  -webkit-text-decoration-line: underline;
+  text-decoration-line: underline;
+  -webkit-text-decoration-color: #666;
+  text-decoration-color: #666;
+}
+
+@media all and (max-width: 980px) {
+  .article--post__stats {
+    width: 100%;
+    float: none;
+    clear: both;
+  }
+
+  .article--post__stats ul li {
+    display: inline;
+    margin-right: 1.5em;
+  }
+}
+
+.article--post__stats--featured-article {
+  width: auto;
+  float: left;
+}
+
+.article--post__stats--featured-article ul {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+}
+
+.article--post__stats--featured-article li {
+  display: inline-block;
+}
+
+.article--post__stats--featured-article li::after {
+  content: '';
+  display: inline-block;
+  width: 1em;
+}
+
+.article--post__icon {
+  height: .8em;
+}
+
+.bio-image {
+  --bio-image-border-width: 5px;
+}
+
+.bio-image, .bio-image *, .bio-image :after, .bio-image :before {
+  box-sizing: border-box
+}
+
+.bio-image {
+  padding: 0;
+  margin: 0;
+  display: block;
+  width: auto;
+  height: auto;
+  border-radius: inherit;
+  position: relative;
+}
+
+.bio-image::before {
+  display: block;
+  content: '';
+  height: 90%;
+  width: 160%;
+  position: absolute;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAI8AAAASCAYAAABim40OAAACuElEQVRogc1XUZJjIQjEzN7/yMl8ucP0dkNjXrKh6pWAqERaICveR+vD96vo8cazOvoYX54NwOl6Z52ycc907E4C4a45DfKrwHH5vpPgd7aTYKNOyUvYKL7zRZG6WNRP5cne7pxrMwHLEbCqS3aDMglwpcvjMmTGVz4wejQ86lDfjZ0OeSY/az/VMaJ2XQZA/QQQChSKV99N8OpjvuHvUsGt+ErX2bI9q7Hy0dE580pnZ0R1uTi/eSVX2SLrbmKeAeQG34qIL2KDozo/kwosBv4Ouk5WOheMyrfK5t1Z8K++Ak9XVjK/ZRW8LnMgYDZQtpx5lBFoERxI//z40EFmQLgn2R27PZkP0fDVGmaj5thdoE7JEREPBR6nFJ1+CCAFgq9mVF91dhUcBRgGHMWjju0TZN7xi+nVGmaH8wG2IeaUHH+ibyqRTuxZCVGyAhgrZQi0KrtlYgHYAV1JXvET8IjfF7jnb4mPpMtg2TZbr0rpSnwQO9SzjLAauxV83Zj2j1FU9QtX0fQMfD1VM6zWn9D00agz3fOr866OwRF1mUe9EmaDL8d9HflF5jS/M8Yd1rHzsWzt87HMdr0D+sB6HixPXV/EyqH6QvCqBOE9qPXMTsmMqI3TMG9eNc7P9EJYYvK/KdUsZz0raZF06Hu+DCxBD+BZv1L1RKeAcXsZpnNtgtiEmEOeyRHx0zBvchtnHBWAUFa66q86ggltuj5HZU73pVdAcMHhAEX5xHys/Ge/j43IO/IvfZdxmM4FVDdOs1X1Twr3YWciTYPjZopXZILOxgWElVGIjs5V/Yw752QrxU/A1fGdL4yciz551U45qILa+fbsOmeutekud2I7BeJJhmPr3L07KlN0Y/eMzpmb2JzYntgfXfIr9nLWXgl0RuPLO1xzxdqPOPNK8FxJn+rXhP4HON5K31PHDhmjlm6fAAAAAElFTkSuQmCC);
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  top: 89%;
+  left: -30%;
+  right: 0;
+  transform-origin: 30% 50%;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity .3s ease-in-out;
+}
+
+.bio-image:hover::before {
+  opacity: 0;
+}
+
+.bio-image--white {
+  --bio-image-border-color: #fff;
+}
+
+.bio-image--white a {
+  color: #fff;
+  -webkit-text-decoration-line: underline;
+  text-decoration-line: underline;
+  -webkit-text-decoration-color: #fff;
+  text-decoration-color: #fff;
+  padding: 10px 0;
+  transition: color .1s ease-out;
+}
+
+a.bio-image-link {
+  background: 0 0;
+  text-shadow: none;
+  color: inherit;
+  padding: 0;
+  display: block;
+  border-radius: inherit;
+  width: auto;
+  height: auto;
+}
+
+a.bio-image-link::before {
+  display: block;
+  content: '';
+  height: 120%;
+  width: 120%;
+  position: absolute;
+  top: -10%;
+  left: -12%;
+}
+
+.bio-image-wrapper {
+  background: var(--bio-image-background-color, var(--bio-image-border-color, @primary-color));
+  border: solid var(--bio-image-border-width, 8px) var(--bio-image-border-color, @primary-color);
+  border-radius: inherit;
+  transform: scale(.84) translateX(15%) rotateZ(calc(-1 * (11 * 1deg)));
+  transform-origin: 0 100%;
+  transition: transform .2s ease-out;
+  overflow: hidden;
+  width: auto;
+  height: auto;
+}
+
+.bio-image-image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.2) rotateZ(calc(11 * 1deg));
+  transition: transform .2s ease-out;
+}
+
+.bio-image-link:active .bio-image-wrapper, .bio-image-link:focus .bio-image-wrapper, .bio-image:hover .bio-image-wrapper {
+  transform: scale(.84) translateX(15%) rotateZ(0);
+}
+
+.bio-image-link:active .bio-image-image, .bio-image-link:focus .bio-image-image, .bio-image:hover .bio-image-image {
+  transform: scale(1.2) rotateZ(0);
+}
+
+.author-post__tag {
+  font-weight: 700;
+  color: #666;
+  font-size: .9em;
+  font-family: -apple-system, Arial, BlinkMacSystemFont, Roboto Slab, Droid Serif, Segoe UI, Ubuntu, Cantarell, Georgia, serif;
+  text-decoration: none;
+  padding: 10px 0;
+  transition: color .1s ease-out;
+}
+
+.author-post__tag span::after {
+  content: ", ";
+  color: #767676
+}
+
+.author-post__tag span:last-child::after {
+  content: ""
+}
+
+.author-post__read-more {
+  color: @primary-color;
+  font-weight: 700;
+  -webkit-text-decoration-line: underline;
+  text-decoration-line: underline;
+  font-family: -apple-system, Arial, BlinkMacSystemFont, Roboto Slab, Droid Serif, Segoe UI, Ubuntu, Cantarell, Georgia, serif
+}
+
+.author-post__author-title {
+  color: @primary-color;
+  -webkit-text-decoration-line: underline;
+  text-decoration-line: underline;
+  font-weight: 700;
+  font-size: .9em;
+  font-family: -apple-system, Arial, BlinkMacSystemFont, Roboto Slab, Droid Serif, Segoe UI, Ubuntu, Cantarell, Georgia, serif;
+}
+
+
+.light-grey {
+  color: #767676!important;
+}
+
+.small {
+  font-size: .8em!important;
+}

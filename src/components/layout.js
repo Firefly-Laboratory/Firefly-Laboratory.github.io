@@ -13,7 +13,7 @@ const Layout = ({ defKey, children }) => {
         id="header"
         style={{
           position: "fixed",
-          zIndex: 1,
+          zIndex: 10,
           width: "100%",
           padding: 0,
         }}
@@ -27,7 +27,7 @@ const Layout = ({ defKey, children }) => {
           minHeight: "100vh", //edit this to change minimum page height
         }}
       >
-        <div style={{ color: 'var(--textNormal)', background: 'var(--bg)', maxWidth: "900px", margin: "0 auto" }}>{children}</div>
+        <div style={{ color: 'var(--textNormal)', background: 'var(--bg)' }}>{children}</div>
       </Content>
       <AntdFooter className="main-footer-wrapper">
         <Footer />

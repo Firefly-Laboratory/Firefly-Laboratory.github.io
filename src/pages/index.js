@@ -1,23 +1,19 @@
 import React from "react"
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import PostCard from '../components/post-card'
 
 const IndexPage = ({ data }) => (
   <Layout defKey="home">
     <SEO title="Home" />
-    <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
-    {data.allMarkdownRemark.edges.map(({ node }) => (
-      <div key={node.id}>
-        <Link to={node.fields.slug}>
-          <h3>
-            {node.frontmatter.title}{" "}
-            <span>— {node.frontmatter.date}</span>
-          </h3>
-          <p>{node.excerpt}</p>
-        </Link>
+    <div className="container">
+      <div className="f-article-highlights article--grid__container">
+        {data.allMarkdownRemark.edges.map(({ node }) => (
+          <PostCard key={node.id} node={node} />
+        ))}
       </div>
-    ))}
+    </div>
   </Layout>
 )
 
@@ -30,7 +26,8 @@ export const query = graphql`
           id
           frontmatter {
             title
-            date(formatString: "DD MMMM, YYYY")
+            date(formatString: "YYYY-MM-DD")
+            tags
           }
           fields {
             slug

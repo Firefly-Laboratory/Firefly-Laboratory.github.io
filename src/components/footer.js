@@ -24,8 +24,8 @@ const Footer = () => {
             {
               allMarkdownRemark.group.map((tagItem, index) => {
                 return (
-                  <li className="footer__topics__item">
-                    <Link to={`/tags/${_.kebabCase(tagItem.tag)}/`} key={index}>{tagItem.tag}</Link>
+                  <li className="footer__topics__item" key={index}>
+                    <Link to={`/tags/${_.kebabCase(tagItem.tag)}/`}>{tagItem.tag}</Link>
                   </li>
                 )
               })

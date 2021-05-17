@@ -14,7 +14,7 @@ const Navigation = ({ defKey }) => {
     window.__onThemeChange = () => {
       setTheme(window.__theme);
     };
-  });
+  }, []);
 
   return (
     <Row style={{ flexFlow: 'nowrap', height: 64 }}>
@@ -52,6 +52,7 @@ const Navigation = ({ defKey }) => {
                     height="16"
                     role="presentation"
                     style={{ pointerEvents: 'none' }}
+                    alt="checked"
                   />
                 ),
                 unchecked: (
@@ -61,6 +62,7 @@ const Navigation = ({ defKey }) => {
                     height="16"
                     role="presentation"
                     style={{ pointerEvents: 'none' }}
+                    alt="unchecked"
                   />
                 ),
               }}
