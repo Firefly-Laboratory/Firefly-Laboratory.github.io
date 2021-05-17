@@ -2,6 +2,7 @@
 title: 将 React 作为 UI 运行时
 date: '2019-02-02'
 spoiler: 深入理解 React 编程模型
+tags: ['Articles']
 ---
 
 大多数教程把 React 称作是一个 UI 库。这是有道理的，因为 React 就是一个 UI 库。正如官网上的标语所说的那样。
