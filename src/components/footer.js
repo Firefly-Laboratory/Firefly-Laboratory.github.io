@@ -15,7 +15,6 @@ const Footer = () => {
       }
     `
   )
-  console.log(allMarkdownRemark)
   return (
     <footer className="main-footer">
       <div className="container">
