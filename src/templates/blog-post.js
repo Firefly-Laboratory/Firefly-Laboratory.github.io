@@ -6,6 +6,7 @@ import Image from '../components/image'
 
 export default function BlogPost({ data }) {
   const post = data.markdownRemark
+
   return (
     <Layout>
       <div className="container article-container">
@@ -47,6 +48,7 @@ export default function BlogPost({ data }) {
 
             <div className="c-garfield-aside--meta">
               <ul className="meta-box meta-box--article">
+                <li className="meta-box--item meta-box--tags">收录于：</li>
                 <li className="meta-box--item meta-box--tags">
                   {
                     post.frontmatter.tags.map((tagName, index) => {
@@ -55,6 +57,7 @@ export default function BlogPost({ data }) {
                   }
                 </li>
               </ul>
+              <div className="table-of-contents" dangerouslySetInnerHTML={{ __html: post.tableOfContents }} />
             </div>
 
             <div className="c-garfield-summary" id="article__start">
@@ -73,7 +76,9 @@ export default function BlogPost({ data }) {
 export const query = graphql`
   query BlogPostBySlug($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
+      id
       html
+      tableOfContents
       frontmatter {
         title
         date(formatString: "YYYY-MM-DD")

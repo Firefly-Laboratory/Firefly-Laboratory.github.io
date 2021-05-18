@@ -96,6 +96,9 @@
       align-self: start;
       margin: 0;
       overflow: hidden;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 80px;
     }
 
     .c-garfield-the-cat > .break-out {
@@ -754,5 +757,35 @@
     display: block;
     content: "";
     margin-bottom: 10px;
+  }
+}
+.table-of-contents {
+  display: block;
+  max-height: 80vh;
+  color: var(--textNormal);
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-size: 14px;
+  margin: 2em 0;
+  padding: 25px 10px 7px;
+  ul {
+    list-style-type: none;
+    margin-bottom: 0;
+    padding-left: 10px;
+    p {
+      vertical-align: top;
+      display: inline-block;
+    }
+  }
+  li {
+    margin-bottom: 6px;
+    &>p {
+      line-height: 1.5;
+      margin: 0;
+    }
+  }
+  a {
+    color: var(--textNormal);
+    box-shadow: none;
   }
 }
