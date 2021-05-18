@@ -21,7 +21,7 @@ const PostCard = ({ node }) => {
           </div>
           <span className="article--post__author-name">
             <Link to={`/author/${_.kebabCase(node.frontmatter.author)}`} className="author-post__author-title">{node.frontmatter.author}</Link>
-            <em className="light-grey"> write </em>
+            {/*<em className="light-grey"> 写了 </em>*/}
           </span>
         </header>
         <h1 className="article--post__title">
