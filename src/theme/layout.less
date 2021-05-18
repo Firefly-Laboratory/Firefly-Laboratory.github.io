@@ -1,7 +1,6 @@
 @header-height: 64px;
 @menu-item-border: 2px;
 @mobile-max-width: 767.99px;
-
 #header {
   position: relative;
   z-index: 10;
@@ -156,4 +155,18 @@
   .container {
     width: 85vw;
   }
+}
+
+html, body {
+  scroll-padding-top: 65px; /* set to the height of your header */
+}
+.headroom {
+  will-change: transform;
+  transition: transform 200ms linear;
+}
+.headroom--pinned {
+  transform: translateY(0%);
+}
+.headroom--unpinned {
+  transform: translateY(-100%);
 }

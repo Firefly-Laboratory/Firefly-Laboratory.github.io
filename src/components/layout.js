@@ -1,16 +1,27 @@
-import React from "react"
+import React, { useEffect } from "react"
 import PropTypes from "prop-types"
 import { Layout as AntdLayout } from "antd"
+import Headroom from "headroom.js";
 import Navigation from './navigation';
 import Footer from './footer';
 
 const { Header, Footer: AntdFooter, Content } = AntdLayout
 
 const Layout = ({ defKey, children }) => {
+
+  useEffect(() => {
+    if (Headroom.cutsTheMustard) {
+      const headerElement = document.querySelector("header")
+      const headroom  = new Headroom(headerElement);
+      headroom.init();
+    }
+  }, [])
+
   return (
     <AntdLayout>
       <Header
         id="header"
+        className="headroom"
         style={{
           position: "fixed",
           zIndex: 10,

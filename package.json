@@ -24,6 +24,7 @@
     "gatsby-source-filesystem": "^2.3.19",
     "gatsby-transformer-remark": "^2.1.17",
     "gatsby-transformer-sharp": "^2.5.11",
+    "headroom.js": "^0.12.0",
     "less": "^3.11.3",
     "less-to-json": "^1.2.0",
     "lodash": "^4.17.21",
