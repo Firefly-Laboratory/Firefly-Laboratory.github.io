@@ -2,7 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import _ from "lodash"
 import Layout from "../components/layout"
-import profileImage from '../images/dan-abramov.jpg';
+import Image from '../components/image'
 
 export default function BlogPost({ data }) {
   const post = data.markdownRemark
@@ -15,23 +15,21 @@ export default function BlogPost({ data }) {
               <div className="l-author-bio">
                 <div className="bio-image__large">
                   <figure role="presentation" className="bio-image">
-                    <Link to={`/author/dan-abramov`} className="bio-image-link">
+                    <Link to={`/author/${_.kebabCase(post.frontmatter.author)}`} className="bio-image-link">
                       <div className="bio-image-wrapper">
-                        <picture>
-                            <img className="bio-image-image"
-                                 src={profileImage}
-                                 width="100" height="100" alt="Dan Abramov" />
-                        </picture>
+                        <Image className="bio-image-image"
+                               name={`${_.kebabCase(post.frontmatter.author)}`}
+                               width="100" height="100" alt={post.frontmatter.author} />
                       </div>
                     </Link>
                   </figure>
                 </div>
                 <div className="l-author-bio-content author__desc" id="author__desc">
-                  <h3 className="author__desc__title">关于作者</h3>
-                  <p>
-                    Dan Abramov是Redux作者。
-                    <Link to={`/author/dan-abramov`} className="show-more-link">Dan Abramov 更多信息</Link>
-                  </p>
+                  <h3 className="author__desc__title">
+                    <Link to={`/author/${_.kebabCase(post.frontmatter.author)}`} className="show-more-link">
+                      关于作者 {post.frontmatter.author} 更多信息
+                    </Link>
+                  </h3>
                 </div>
               </div>
             </div>
@@ -44,9 +42,6 @@ export default function BlogPost({ data }) {
                   </li>
                 </ul>
                 <h1 className="article-header--title">{post.frontmatter.title}</h1>
-                <div data-component="EditButton" data-collection="articles"
-                     data-path="articles/2021-05-14-tree-shaking-reference-guide.md">
-                </div>
               </header>
             </div>
 
@@ -83,6 +78,7 @@ export const query = graphql`
         title
         date(formatString: "YYYY-MM-DD")
         tags
+        author
       }
       excerpt
     }

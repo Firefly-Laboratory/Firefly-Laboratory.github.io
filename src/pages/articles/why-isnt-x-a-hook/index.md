@@ -3,6 +3,7 @@ title: 为什么 'XX' 不是一个 Hooks API?
 date: '2019-01-26'
 spoiler: 我们可以这样做，但并不是意味着我们应该这样做。
 tags: ['Articles']
+author: 'Dan Abramov'
 ---
 
 自从 [React Hooks](https://reactjs.org/hooks) 发布 alpha 版本, 就有很多人对一些问题的讨论，比如: “为什么有些 API 不是一个 Hook?”。

@@ -3,6 +3,7 @@ title: '在你写memo()之前'
 date: '2021-02-23'
 spoiler: "自然产生的渲染优化"
 tags: ['Articles']
+author: 'Dan Abramov'
 ---
 
 有很多描写React性能优化的文章。一般而言，如果某些state更新缓慢的话，你需要：

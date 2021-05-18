@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import _ from 'lodash';
-import profileImage from '../images/dan-abramov.jpg';
+import Image from './image'
 
 const PostCard = ({ node }) => {
   return (
@@ -10,19 +10,17 @@ const PostCard = ({ node }) => {
         <header>
           <div className="article--post__image">
             <figure role="presentation" className="bio-image">
-              <Link to={`/author/dan-abramov`} className="bio-image-link">
+              <Link to={`/author/${_.kebabCase(node.frontmatter.author)}`} className="bio-image-link">
                 <div className="bio-image-wrapper">
-                  <picture>
-                    <img className="bio-image-image"
-                         src={profileImage}
-                         width="100" height="100" alt="Dan Abramov" />
-                  </picture>
+                  <Image name={`${_.kebabCase(node.frontmatter.author)}`}
+                         className="bio-image-image"
+                         width="100" height="100" alt={node.frontmatter.author} />
                 </div>
               </Link>
             </figure>
           </div>
           <span className="article--post__author-name">
-            <Link to={`/author/dan-abramov`} className="author-post__author-title">Dan Abramov</Link>
+            <Link to={`/author/${_.kebabCase(node.frontmatter.author)}`} className="author-post__author-title">{node.frontmatter.author}</Link>
             <em className="light-grey"> write </em>
           </span>
         </header>
