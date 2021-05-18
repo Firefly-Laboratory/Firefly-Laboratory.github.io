@@ -8,7 +8,7 @@
 }
 
 .c-garfield-the-cat > blockquote.pull-quote a:not(.btn) {
-  color: #333;
+  color: var(--textNormal);
 }
 .bio-image__large {
   width: 12rem;
@@ -85,7 +85,7 @@
     }
 
     .c-sidenote {
-      color: #666;
+      color: var(--textNormal);
       font-size: .95em;
       font-style: italic;
     }
@@ -259,7 +259,7 @@
 
 .article-header--meta-item__date, time {
   font-size: .8em;
-  color: #666;
+  color: var(--textNormal);
   text-transform: lowercase;
   font-feature-settings: 'smcp' 1, 'c2sc' 1;
   letter-spacing: 1px;
@@ -276,7 +276,7 @@
 .featured-article__time .article-header--meta-item__date, .featured-article__time time {
   display: none;
   vertical-align: middle;
-  color: #390c09;
+  color: var(--textNormal);
 }
 
 .featured-article__time .article-header--meta-item__date::before, .featured-article__time time::before {
@@ -284,7 +284,7 @@
   display: inline-block;
   vertical-align: middle;
   height: 2px;
-  background-color: #390c09;
+  background-color: var(--bg);
   width: 70px;
   margin-right: .5em;
   font-weight: 400;
@@ -336,7 +336,7 @@
 .article-header--meta li::after {
   content: '•';
   font-size: .8em;
-  color: #d33a2c;
+  color: var(--textNormal);
   display: inline-block;
   margin: 0 .4em 0 .4em;
 }
@@ -346,7 +346,7 @@
 }
 
 .article-header--date {
-  color: #666;
+  color: var(--textNormal);
   font-size: 1.05em;
   font-family: inherit;
 }
@@ -358,7 +358,7 @@
 }
 
 .article-header--meta-item__date a:not(.btn) {
-  color: #666;
+  color: var(--textNormal);
 }
 
 .article-header--comments {
@@ -366,7 +366,7 @@
 }
 
 .meta-box {
-  background: #f6f6f6;
+  background: var(--meta-box);
   padding: 1em;
   margin: 0 0 2em 0;
   list-style: none;
@@ -377,6 +377,7 @@
 }
 
 .meta-box li, .meta-box--item {
+  color: var(--textNormal);
   line-height: 1.4;
   padding-left: calc(1em + .5em);
   background-size: auto 1em;
@@ -449,7 +450,7 @@
 }
 
 .article__summary {
-  color: #666;
+  color: var(--textNormal);
   border-bottom: 3px solid #e5e5e5;
 }
 
@@ -461,7 +462,7 @@
   font-size: .75em;
   margin: 0;
   font-weight: 600;
-  color: #d33a2c;
+  color: var(--textNormal);
   text-transform: uppercase;
 }
 
@@ -478,7 +479,7 @@
 }
 
 .article__summary .article__summary__title, .article__summary .internal__summary__title, .internal__summary .article__summary__title, .internal__summary .internal__summary__title {
-  color: #666;
+  color: var(--textNormal);
   font-feature-settings: 'smcp' 1, 'c2sc' 1;
   letter-spacing: 1px;
   font-variant: petite-caps;
@@ -512,7 +513,7 @@
 
 .post-content {
   font: 400 18px/1.62 "Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;
-  color: #444443;
+  color: var(--textNormal);
 }
 .post-content h1,
 .post-content h2,
@@ -521,7 +522,7 @@
 .post-content h5,
 .post-content h6 {
   font-family: "Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
-  color: #222223;
+  color: var(--textNormal);
 }
 .post-content h1 {
   font-size: 1.8em;
@@ -568,12 +569,12 @@
 .post-content strong,
 .post-content b {
   font-weight: 700;
-  color: #222223;
+  color: var(--textNormal);
 }
 .post-content em,
 .post-content i {
   font-style: italic;
-  color: #222223;
+  color: var(--textNormal);
 }
 .post-content img {
   max-width: 100%;
@@ -604,11 +605,11 @@
   margin-top: 10px;
   font-weight: 400;
   font-size: 14px;
-  color: #666665;
+  color: var(--textNormal);
 }
 .post-content figure figcaption a {
   text-decoration: none;
-  color: #666665;
+  color: var(--textNormal);
 }
 .post-content hr {
   display: block;
@@ -623,10 +624,10 @@
   margin: 0 0 1.64em 0;
   border-left: 3px solid #e67e22;
   padding-left: 12px;
-  color: #666664;
+  color: var(--textNormal);
 }
 .post-content blockquote a {
-  color: #666664;
+  color: var(--textNormal);
 }
 .post-content ul,
 .post-content ol {
