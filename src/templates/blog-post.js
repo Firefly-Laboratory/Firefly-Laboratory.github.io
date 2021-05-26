@@ -1,11 +1,13 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import _ from "lodash"
+import { defineCustomElements as deckDeckGoHighlightElement } from '@deckdeckgo/highlight-code/dist/loader';
 import Layout from "../components/layout"
 import Image from '../components/image'
 
 export default class BlogPost extends React.Component {
   componentDidMount() {
+    deckDeckGoHighlightElement();
     let pre = window.location.hash || ''
     if (pre)
       document.querySelector(`.table-of-contents a[href*="${pre}"]`).className = 'active'

@@ -40,11 +40,17 @@ module.exports = {
           },
           'gatsby-remark-autolink-headers',
           {
-            resolve: 'gatsby-remark-prismjs',
+            resolve: 'gatsby-remark-highlight-code',
             options: {
-              inlineCodeMarker: '÷',
-            },
+              lineNumbers: true
+            }
           },
+          // {
+          //   resolve: 'gatsby-remark-prismjs',
+          //   options: {
+          //     inlineCodeMarker: '÷',
+          //   },
+          // },
           'gatsby-remark-copy-linked-files',
           'gatsby-remark-smartypants',
           {
