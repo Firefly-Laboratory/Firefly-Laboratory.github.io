@@ -108,7 +108,7 @@
 <h2 id="一个-hook-usestate"><a href="#%E4%B8%80%E4%B8%AA-hook-usestate" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>一个 Hook: <code>useState()</code></h2>
 <h3 id="组合"><a href="#%E7%BB%84%E5%90%88" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>组合</h3>
 <p>多个自定义的 Hooks 调用 <code>useState()</code>，而不会造成冲突：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">function useMyCustomHook1() {
   const [value, setValue] = useState(0);
   // What happens here, stays here.
@@ -129,7 +129,7 @@ function MyComponent() {
 <p><strong>结论:</strong> ✅ <code>useState()</code> 不会对其他自定义的 Hooks 造成破坏。 </p>
 <h3 id="调试"><a href="#%E8%B0%83%E8%AF%95" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>调试</h3>
 <p>Hooks 是非常有用的，你可以在 Hooks <em>之间</em>传递值：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="4 12 14">
+<deckgo-highlight-code language="jsx"  highlight-lines="4 12 14">
           <code slot="code">function useWindowWidth() {
   const [width, setWidth] = useState(window.innerWidth);
   // ...
@@ -163,7 +163,7 @@ function Comment() {
 <p>作为一种优化, 组件使用 Hooks 可以避免重新渲染。</p>
 <p>另一种方式是我们可以使用 <a href="https://reactjs.org/blog/2018/10/23/react-v-16-6.html#reactmemo" target="_blank" rel="nofollow noopener noreferrer"><code>React.memo()</code></a> 包裹整个组件。 为了避免重新渲染，<code>React.memo()</code> 会用本次即将渲染的 props 和最后一次渲染的 props 通过 <code>shallowly equal</code> 去做比较， 这个和 <code>PureComponent</code> 是类似的。</p>
 <p><code>React.memo()</code> 接收一个组件作为参数并返回一个组件：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="4">
+<deckgo-highlight-code language="jsx"  highlight-lines="4">
           <code slot="code">function Button(props) {
   // ...
 }
@@ -171,7 +171,7 @@ export default React.memo(Button);</code>
         </deckgo-highlight-code>
 <p><strong>但是 <code>useBailout()</code> 为什么不仅仅是一个钩子</strong></p>
 <p>不论你将其称之为 <code>useShouldComponentUpdate()</code>， <code>usePure()</code>， <code>useSkipRender()</code> 或者 <code>useBailout()</code>， 这个提案(proposal)看起来就和下面这个是一样的：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">function Button({ color }) {
   // ⚠️ 非真实API
   useBailout(prevColor =&gt; prevColor !== color, color);
@@ -186,7 +186,7 @@ export default React.memo(Button);</code>
 <p>也有一些其他不同的提案（比如：<a href="https://github.com/reactjs/rfcs/pull/30#issuecomment-371337630" target="_blank" rel="nofollow noopener noreferrer"><code>usePure()</code></a>），但是一般来说，这个提案也有同样的问题。</p>
 <h3 id="组合-1"><a href="#%E7%BB%84%E5%90%88-1" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>组合</h3>
 <p>让我们尝试将 <code>useBailout()</code> 在两个自定义的 Hooks 中使用：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="4 5 19 20">
+<deckgo-highlight-code language="jsx"  highlight-lines="4 5 19 20">
           <code slot="code">function useFriendStatus(friendID) {
   const [isOnline, setIsOnline] = useState(null);
 
@@ -218,7 +218,7 @@ function useWindowWidth() {
 }</code>
         </deckgo-highlight-code>
 <p>如果现在在同一个组件中使用这两个自定义的 Hooks 会发生什么？</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="2 3">
+<deckgo-highlight-code language="jsx"  highlight-lines="2 3">
           <code slot="code">function ChatThread({ friendID, isTyping }) {
   const width = useWindowWidth();
   const isOnline = useFriendStatus(friendID);
@@ -238,7 +238,7 @@ function useWindowWidth() {
 <h3 id="调试-1"><a href="#%E8%B0%83%E8%AF%95-1" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>调试</h3>
 <p>像 <code>useBailout()</code> 的这样的 hook 会对调试造成什么影响？</p>
 <p>我们使用同样的列子:</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">function ChatThread({ friendID, isTyping }) {
   const width = useWindowWidth();
   const isOnline = useFriendStatus(friendID);

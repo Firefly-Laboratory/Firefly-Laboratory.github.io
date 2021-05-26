@@ -168,7 +168,7 @@
 <h2 id="每一次渲染都有它自己的-props-and-state"><a href="#%E6%AF%8F%E4%B8%80%E6%AC%A1%E6%B8%B2%E6%9F%93%E9%83%BD%E6%9C%89%E5%AE%83%E8%87%AA%E5%B7%B1%E7%9A%84-props-and-state" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>每一次渲染都有它自己的 Props and State</h2>
 <p>在我们讨论effects之前，我们需要先讨论一下渲染（rendering）。</p>
 <p>我们来看一个计数器组件Counter，注意高亮的那一行：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="6">
+<deckgo-highlight-code language="jsx"  highlight-lines="6">
           <code slot="code">function Counter() {
   const [count, setCount] = useState(0);
 
@@ -184,14 +184,14 @@
         </deckgo-highlight-code>
 <p>高亮的代码究竟是什么意思呢？<code>count</code> 会“监听”状态的变化并自动更新吗？这么想可能是学习React的时候有用的第一直觉，但它并不是<a href="https://overreacted.io/react-as-a-ui-runtime/" target="_blank" rel="nofollow noopener noreferrer">精确的心智模型</a>。</p>
 <p><strong>上面例子中，<code>count</code>仅是一个数字而已。</strong>它不是神奇的“data binding”, “watcher”, “proxy”，或者其他任何东西。它就是一个普通的数字像下面这个一样：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">const count = 42;
 // ...
 &lt;p&gt;You clicked {count} times&lt;/p&gt;
 // ...</code>
         </deckgo-highlight-code>
 <p>我们的组件第一次渲染的时候，从<code>useState()</code>拿到<code>count</code>的初始值<code>0</code>。当我们调用<code>setCount(1)</code>，React会再次渲染组件，这一次<code>count</code>是<code>1</code>。如此等等：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="3 11 19">
+<deckgo-highlight-code language="jsx"  highlight-lines="3 11 19">
           <code slot="code">// During first render
 function Counter() {
   const count = 0; // Returned by useState()
@@ -218,7 +218,7 @@ function Counter() {
         </deckgo-highlight-code>
 <p><strong>当我们更新状态的时候，React会重新渲染组件。每一次渲染都能拿到独立的<code>count</code> 状态，这个状态值是函数中的一个常量。</strong></p>
 <p>所以下面的这行代码没有做任何特殊的数据绑定：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">&lt;p&gt;You clicked {count} times&lt;/p&gt;</code>
         </deckgo-highlight-code>
 <p><strong>它仅仅只是在渲染输出中插入了count这个数字。</strong>这个数字由React提供。当<code>setCount</code>的时候，React会带着一个不同的<code>count</code>值再次调用组件。然后，React会更新DOM以保持和渲染输出一致。</p>
@@ -227,7 +227,7 @@ function Counter() {
 <h2 id="每一次渲染都有它自己的事件处理函数"><a href="#%E6%AF%8F%E4%B8%80%E6%AC%A1%E6%B8%B2%E6%9F%93%E9%83%BD%E6%9C%89%E5%AE%83%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>每一次渲染都有它自己的事件处理函数</h2>
 <p>到目前为止一切都还好。那么事件处理函数呢？</p>
 <p>看下面的这个例子。它在三秒后会alert点击次数<code>count</code>：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="4,8 16,18">
+<deckgo-highlight-code language="jsx"  highlight-lines="4,8 16,18">
           <code slot="code">function Counter() {
   const [count, setCount] = useState(0);
 
@@ -270,7 +270,7 @@ function Counter() {
 <p>但它究竟是如何工作的呢？</p>
 <p>我们发现<code>count</code>在每一次函数调用中都是一个常量值。值得强调的是 — <strong>我们的组件函数每次渲染都会被调用，但是每一次调用中<code>count</code>值都是常量，并且它被赋予了当前渲染中的状态值。</strong></p>
 <p>这并不是React特有的，普通的函数也有类似的行为：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="2">
+<deckgo-highlight-code language="jsx"  highlight-lines="2">
           <code slot="code">function sayHi(person) {
   const name = person.name;
   setTimeout(() =&gt; {
@@ -289,7 +289,7 @@ sayHi(someone);</code>
         </deckgo-highlight-code>
 <p>在 <a href="https://codesandbox.io/s/mm6ww11lk8" target="_blank" rel="nofollow noopener noreferrer">这个例子</a>中, 外层的<code>someone</code>会被赋值很多次（就像在React中，<em>当前</em>的组件状态会改变一样）。<strong>然后，在<code>sayHi</code>函数中，局部常量<code>name</code>会和某次调用中的<code>person</code>关联。</strong>因为这个常量是局部的，所以每一次调用都是相互独立的。结果就是，当定时器回调触发的时候，每一个alert都会弹出它拥有的<code>name</code>。</p>
 <p>这就解释了我们的事件处理函数如何捕获了点击时候的<code>count</code>值。如果我们应用相同的替换原理，每一次渲染“看到”的是它自己的<code>count</code>：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="3 15 27">
+<deckgo-highlight-code language="jsx"  highlight-lines="3 15 27">
           <code slot="code">// During first render
 function Counter() {
   const count = 0; // Returned by useState()
@@ -328,7 +328,7 @@ function Counter() {
         </deckgo-highlight-code>
 <p>所以实际上，每一次渲染都有一个“新版本”的<code>handleAlertClick</code>。每一个版本的<code>handleAlertClick</code>“记住” 了它自己的
 <code>count</code>：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="6 10 19 23 32 36">
+<deckgo-highlight-code language="jsx"  highlight-lines="6 10 19 23 32 36">
           <code slot="code">// During first render
 function Counter() {
   // ...
@@ -374,7 +374,7 @@ function Counter() {
 <h2 id="每次渲染都有它自己的effects"><a href="#%E6%AF%8F%E6%AC%A1%E6%B8%B2%E6%9F%93%E9%83%BD%E6%9C%89%E5%AE%83%E8%87%AA%E5%B7%B1%E7%9A%84effects" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>每次渲染都有它自己的Effects</h2>
 <p>这篇文章是关于effects的，但目前我们居然还没有讨论effects！ 言归正传，由上面的分析得出一个结果，effects其实并没有什么两样。</p>
 <p>让我们回到<a href="https://reactjs.org/docs/hooks-effect.html" target="_blank" rel="nofollow noopener noreferrer">官网文档</a>中的这个例子：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="4,6">
+<deckgo-highlight-code language="jsx"  highlight-lines="4,6">
           <code slot="code">function Counter() {
   const [count, setCount] = useState(0);
 
@@ -398,7 +398,7 @@ function Counter() {
 <p>我们已经知道<code>count</code>是某个特定渲染中的常量。事件处理函数“看到”的是属于它那次特定渲染中的<code>count</code>状态值。对于effects也同样如此：</p>
 <p><strong>并不是<code>count</code>的值在“不变”的effect中发生了改变，而是<em>effect 函数本身</em>在每一次渲染中都不相同。</strong></p>
 <p>每一个effect版本“看到”的<code>count</code>值都来自于它属于的那次渲染：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="5,8 17,20 29,32">
+<deckgo-highlight-code language="jsx"  highlight-lines="5,8 17,20 29,32">
           <code slot="code">// During first render
 function Counter() {
   // ...
@@ -486,7 +486,7 @@ function Counter() {
 <h2 id="每一次渲染都有它自己的所有"><a href="#%E6%AF%8F%E4%B8%80%E6%AC%A1%E6%B8%B2%E6%9F%93%E9%83%BD%E6%9C%89%E5%AE%83%E8%87%AA%E5%B7%B1%E7%9A%84%E6%89%80%E6%9C%89" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>每一次渲染都有它自己的…所有</h2>
 <p><strong>我们现在知道effects会在每次渲染后运行，并且概念上它是组件输出的一部分，可以“看到”属于某次特定渲染的props和state。</strong></p>
 <p>我们来做一个思想实验，思考下面的代码：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="4,8">
+<deckgo-highlight-code language="jsx"  highlight-lines="4,8">
           <code slot="code">function Counter() {
   const [count, setCount] = useState(0);
 
@@ -514,7 +514,7 @@ function Counter() {
 <p><img src="/a5727d333c270e05942f508707265378/timeout_counter.gif" alt="1, 2, 3, 4, 5 顺序打印"></p>
 <p>你可能会想：“它当然应该是这样的。否则还会怎么样呢？”</p>
 <p>不过，class中的<code>this.state</code>并不是这样运作的。你可能会想当然以为下面的<a href="https://codesandbox.io/s/kkymzwjqz3" target="_blank" rel="nofollow noopener noreferrer">class 实现</a>和上面是相等的：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">  componentDidUpdate() {
     setTimeout(() =&gt; {
       console.log(`You clicked ${this.state.count} times`);
@@ -528,7 +528,7 @@ function Counter() {
 <h2 id="逆潮而动"><a href="#%E9%80%86%E6%BD%AE%E8%80%8C%E5%8A%A8" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>逆潮而动</h2>
 <p>到目前为止，我们可以明确地喊出下面重要的事实：<strong>每一个</strong>组件内的函数（包括事件处理函数，effects，定时器或者API调用等等）会捕获某次渲染中定义的props和state。</p>
 <p>所以下面的两个例子是相等的：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="4">
+<deckgo-highlight-code language="jsx"  highlight-lines="4">
           <code slot="code">function Example(props) {
   useEffect(() =&gt; {
     setTimeout(() =&gt; {
@@ -538,7 +538,7 @@ function Counter() {
   // ...
 }</code>
         </deckgo-highlight-code>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="2 5">
+<deckgo-highlight-code language="jsx"  highlight-lines="2 5">
           <code slot="code">function Example(props) {
   const counter = props.counter;
   useEffect(() =&gt; {
@@ -553,7 +553,7 @@ function Counter() {
 <p>当然，有时候你可能<em>想</em>在effect的回调函数里读取最新的值而不是捕获的值。最简单的实现方法是使用refs，<a href="https://overreacted.io/how-are-function-components-different-from-classes/" target="_blank" rel="nofollow noopener noreferrer">这篇文章</a>的最后一部分介绍了相关内容。</p>
 <p>需要注意的是当你想要从<em>过去</em>渲染中的函数里读取<em>未来</em>的props和state，你是在逆潮而动。虽然它并没有<em>错</em>（有时候可能也需要这样做），但它因为打破了默认范式会使代码显得不够“干净”。这是我们有意为之的，因为它能帮助突出哪些代码是脆弱的，是需要依赖时间次序的。在class中，如果发生这种情况就没那么显而易见了。</p>
 <p>下面这个<a href="https://codesandbox.io/s/rm7z22qnlp" target="_blank" rel="nofollow noopener noreferrer">计数器版本</a> 模拟了class中的行为：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="3 6,7 9,10">
+<deckgo-highlight-code language="jsx"  highlight-lines="3 6,7 9,10">
           <code slot="code">function Example() {
   const [count, setCount] = useState(0);
   const latestCount = useRef(count);
@@ -573,7 +573,7 @@ function Counter() {
 <h2 id="那effect中的清理又是怎样的呢？"><a href="#%E9%82%A3effect%E4%B8%AD%E7%9A%84%E6%B8%85%E7%90%86%E5%8F%88%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%E5%91%A2%EF%BC%9F" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>那Effect中的清理又是怎样的呢？</h2>
 <p>像 <a href="https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup" target="_blank" rel="nofollow noopener noreferrer">文档中解释的</a>, 有些 effects 可能需要有一个清理步骤。本质上，它的目的是消除副作用（effect)，比如取消订阅。</p>
 <p>思考下面的代码:</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">  useEffect(() =&gt; {
     ChatAPI.subscribeToFriendStatus(props.id, handleStatusChange);
     return () =&gt; {
@@ -604,7 +604,7 @@ function Counter() {
 <p>组件内的每一个函数（包括事件处理函数，effects，定时器或者API调用等等）会捕获定义它们的那次渲染中的props和state。</p>
 </blockquote>
 <p>现在答案显而易见。effect的清除并不会读取“最新”的props。它只能读取到定义它的那次渲染中的props值：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="8,11">
+<deckgo-highlight-code language="jsx"  highlight-lines="8,11">
           <code slot="code">// First render, props are {id: 10}
 function Example() {
   // ...
@@ -642,7 +642,7 @@ function Example() {
 <h2 id="同步，-而非生命周期"><a href="#%E5%90%8C%E6%AD%A5%EF%BC%8C-%E8%80%8C%E9%9D%9E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>同步， 而非生命周期</h2>
 <p>我最喜欢React的一点是它统一描述了初始渲染和之后的更新。这降低了你程序的<a href="https://overreacted.io/the-bug-o-notation/" target="_blank" rel="nofollow noopener noreferrer">熵</a>。</p>
 <p>比如我有个组件像下面这样：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">function Greeting({ name }) {
   return (
     &lt;h1 className=&quot;Greeting&quot;&gt;
@@ -655,7 +655,7 @@ function Example() {
 <p>人们总是说：“重要的是旅行过程，而不是目的地”。在React世界中，恰好相反。<strong>重要的是目的，而不是过程。</strong>这就是JQuery代码中 <code>$.addClass</code> 或 <code>$.removeClass</code>这样的调用（过程）和React代码中声明CSS类名<em>应该是什么</em>（目的）之间的区别。</p>
 <p><strong>React会根据我们当前的props和state同步到DOM。</strong>“mount”和“update”之于渲染并没有什么区别。</p>
 <p>你应该以相同的方式去思考effects。<strong><code>useEffect</code>使你能够根据props和state<em>同步</em>React tree之外的东西。</strong></p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="2,4">
+<deckgo-highlight-code language="jsx"  highlight-lines="2,4">
           <code slot="code">function Greeting({ name }) {
   useEffect(() =&gt; {
     document.title = &#39;Hello, &#39; + name;
@@ -674,30 +674,30 @@ function Example() {
 <h2 id="告诉react去比对你的effects"><a href="#%E5%91%8A%E8%AF%89react%E5%8E%BB%E6%AF%94%E5%AF%B9%E4%BD%A0%E7%9A%84effects" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>告诉React去比对你的Effects</h2>
 <p>其实我们已经从React处理DOM的方式中学习到了解决办法。React只会更新DOM真正发生改变的部分，而不是每次渲染都大动干戈。</p>
 <p>当你把</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">&lt;h1 className=&quot;Greeting&quot;&gt;
   Hello, Dan
 &lt;/h1&gt;</code>
         </deckgo-highlight-code>
 <p>更新到</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">&lt;h1 className=&quot;Greeting&quot;&gt;
   Hello, Yuzhi
 &lt;/h1&gt;</code>
         </deckgo-highlight-code>
 <p>React 能够看到两个对象:</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">const oldProps = {className: &#39;Greeting&#39;, children: &#39;Hello, Dan&#39;};
 const newProps = {className: &#39;Greeting&#39;, children: &#39;Hello, Yuzhi&#39;};</code>
         </deckgo-highlight-code>
 <p>它会检测每一个props，并且发现<code>children</code>发生改变需要更新DOM，但<code>className</code>并没有。所以它只需要这样做：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">domNode.innerText = &#39;Hello, Yuzhi&#39;;
 // No need to touch domNode.className</code>
         </deckgo-highlight-code>
 <p><strong>我们也可以用类似的方式处理effects吗？如果能够在不需要的时候避免调用effect就太好了。</strong></p>
 <p>举个例子，我们的组件可能因为状态变更而重新渲染：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="11,13">
+<deckgo-highlight-code language="jsx"  highlight-lines="11,13">
           <code slot="code">function Greeting({ name }) {
   const [counter, setCounter] = useState(0);
 
@@ -717,21 +717,21 @@ const newProps = {className: &#39;Greeting&#39;, children: &#39;Hello, Yuzhi&#39
         </deckgo-highlight-code>
 <p>但是我们的effect并没有使用<code>counter</code>这个状态。<strong>我们的effect只会同步<code>name</code>属性给<code>document.title</code>，但<code>name</code>并没有变。</strong>在每一次counter改变后重新给<code>document.title</code>赋值并不是理想的做法。</p>
 <p>好了，那React可以…区分effects的不同吗？</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">let oldEffect = () =&gt; { document.title = &#39;Hello, Dan&#39;; };
 let newEffect = () =&gt; { document.title = &#39;Hello, Dan&#39;; };
 // Can React see these functions do the same thing?</code>
         </deckgo-highlight-code>
 <p>并不能。React并不能猜测到函数做了什么如果不先调用的话。（源码中并没有包含特殊的值，它仅仅是引用了<code>name</code>属性。）</p>
 <p>这是为什么你如果想要避免effects不必要的重复调用，你可以提供给<code>useEffect</code>一个依赖数组参数(deps)：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="3">
+<deckgo-highlight-code language="jsx"  highlight-lines="3">
           <code slot="code">  useEffect(() =&gt; {
     document.title = &#39;Hello, &#39; + name;
   }, [name]); // Our deps</code>
         </deckgo-highlight-code>
 <p><strong>这好比你告诉React：“Hey，我知道你看不到这个函数里的东西，但我可以保证只使用了渲染中的<code>name</code>，别无其他。”</strong></p>
 <p>如果当前渲染中的这些依赖项和上一次运行这个effect的时候值一样，因为没有什么需要同步React会自动跳过这次effect：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">const oldEffect = () =&gt; { document.title = &#39;Hello, Dan&#39;; };
 const oldDeps = [&#39;Dan&#39;];
 
@@ -744,7 +744,7 @@ const newDeps = [&#39;Dan&#39;];
 <p>即使依赖数组中只有一个值在两次渲染中不一样，我们也不能跳过effect的运行。要同步所有！</p>
 <h2 id="关于依赖项不要对react撒谎"><a href="#%E5%85%B3%E4%BA%8E%E4%BE%9D%E8%B5%96%E9%A1%B9%E4%B8%8D%E8%A6%81%E5%AF%B9react%E6%92%92%E8%B0%8E" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>关于依赖项不要对React撒谎</h2>
 <p>关于依赖项对React撒谎会有不好的结果。直觉上，这很好理解，但我曾看到几乎所有依赖class心智模型使用<code>useEffect</code>的人都试图违反这个规则。（我刚开始也这么干了！）</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">function SearchResults() {
   async function fetchData() {
     // ...
@@ -763,7 +763,7 @@ const newDeps = [&#39;Dan&#39;];
 <p>不过在我们深入解决方案之前，我们先尝试更好地理解问题。</p>
 <h2 id="如果设置了错误的依赖会怎么样呢？"><a href="#%E5%A6%82%E6%9E%9C%E8%AE%BE%E7%BD%AE%E4%BA%86%E9%94%99%E8%AF%AF%E7%9A%84%E4%BE%9D%E8%B5%96%E4%BC%9A%E6%80%8E%E4%B9%88%E6%A0%B7%E5%91%A2%EF%BC%9F" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>如果设置了错误的依赖会怎么样呢？</h2>
 <p>如果依赖项包含了所有effect中使用到的值，React就能知道何时需要运行它：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="3">
+<deckgo-highlight-code language="jsx"  highlight-lines="3">
           <code slot="code">  useEffect(() =&gt; {
     document.title = &#39;Hello, &#39; + name;
   }, [name]);</code>
@@ -771,7 +771,7 @@ const newDeps = [&#39;Dan&#39;];
 <p><img src="/fae247cd068eedbd4b62ba50592d2b3d/deps-compare-correct.gif" alt="effects更新示例图"></p>
 <p><em>(依赖发生了变更，所以会重新运行effect。)</em></p>
 <p>但是如果我们将<code>[]</code>设为effect的依赖，新的effect函数不会运行：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="3">
+<deckgo-highlight-code language="jsx"  highlight-lines="3">
           <code slot="code">  useEffect(() =&gt; {
     document.title = &#39;Hello, &#39; + name;
   }, []); // Wrong: name is missing in deps</code>
@@ -780,7 +780,7 @@ const newDeps = [&#39;Dan&#39;];
 <p><em>(依赖没有变，所以不会再次运行effect。)</em></p>
 <p>在这个例子中，问题看起来显而易见。但在某些情况下如果你脑子里“跳出”class组件的解决办法，你的直觉很可能会欺骗你。</p>
 <p>举个例子，我们来写一个每秒递增的计数器。在Class组件中，我们的直觉是：“开启一次定时器，清除也是一次”。这里有一个<a href="https://codesandbox.io/s/n5mjzjy9kl" target="_blank" rel="nofollow noopener noreferrer">例子</a>说明怎么实现它。当我们理所当然地把它用<code>useEffect</code>的方式翻译，直觉上我们会设置依赖为<code>[]</code>。“我只想运行一次effect”，对吗？</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="9">
+<deckgo-highlight-code language="jsx"  highlight-lines="9">
           <code slot="code">function Counter() {
   const [count, setCount] = useState(0);
 
@@ -798,7 +798,7 @@ const newDeps = [&#39;Dan&#39;];
 <p>如果你的心智模型是“只有当我想重新触发effect的时候才需要去设置依赖”，这个例子可能会让你产生存在危机。你想要触发一次因为它是定时器 — 但为什么会有问题？</p>
 <p>如果你知道依赖是我们给React的暗示，告诉它effect所有需要使用的渲染中的值，你就不会吃惊了。effect中使用了<code>count</code>但我们撒谎说它没有依赖。如果我们这样做迟早会出幺蛾子。</p>
 <p>在第一次渲染中，<code>count</code>是<code>0</code>。因此，<code>setCount(count + 1)</code>在第一次渲染中等价于<code>setCount(0 + 1)</code>。<strong>既然我们设置了<code>[]</code>依赖，effect不会再重新运行，它后面每一秒都会调用<code>setCount(0 + 1)</code> ：</strong></p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="8 12 21,22">
+<deckgo-highlight-code language="jsx"  highlight-lines="8 12 21,22">
           <code slot="code">// First render, state is 0
 function Counter() {
   // ...
@@ -834,7 +834,7 @@ function Counter() {
         </deckgo-highlight-code>
 <p>我们对React撒谎说我们的effect不依赖组件内的任何值，可实际上我们的effect有依赖！</p>
 <p>我们的effect依赖<code>count</code> - 它是组件内的值（不过在effect外面定义）：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="1 5">
+<deckgo-highlight-code language="jsx"  highlight-lines="1 5">
           <code slot="code">  const count = // ...
 
   useEffect(() =&gt; {
@@ -851,7 +851,7 @@ function Counter() {
 <h2 id="两种诚实告知依赖的方法"><a href="#%E4%B8%A4%E7%A7%8D%E8%AF%9A%E5%AE%9E%E5%91%8A%E7%9F%A5%E4%BE%9D%E8%B5%96%E7%9A%84%E6%96%B9%E6%B3%95" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>两种诚实告知依赖的方法</h2>
 <p>有两种诚实告知依赖的策略。你应该从第一种开始，然后在需要的时候应用第二种。</p>
 <p><strong>第一种策略是在依赖中包含所有effect中用到的组件内的值。</strong>让我们在依赖中包含<code>count</code>：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="3 6">
+<deckgo-highlight-code language="jsx"  highlight-lines="3 6">
           <code slot="code">useEffect(() =&gt; {
   const id = setInterval(() =&gt; {
     setCount(count + 1);
@@ -860,7 +860,7 @@ function Counter() {
 }, [count]);</code>
         </deckgo-highlight-code>
 <p>现在依赖数组正确了。虽然它可能不是<em>太理想</em>但确实解决了上面的问题。现在，每次<code>count</code>修改都会重新运行effect，并且定时器中的<code>setCount(count + 1)</code>会正确引用某次渲染中的 <code>count</code>值：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="8 12 24 28">
+<deckgo-highlight-code language="jsx"  highlight-lines="8 12 24 28">
           <code slot="code">// First render, state is 0
 function Counter() {
   // ...
@@ -902,7 +902,7 @@ function Counter() {
 <hr>
 <h2 id="让effects自给自足"><a href="#%E8%AE%A9effects%E8%87%AA%E7%BB%99%E8%87%AA%E8%B6%B3" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>让Effects自给自足</h2>
 <p>我们想去掉effect的<code>count</code>依赖。</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="3 6">
+<deckgo-highlight-code language="jsx"  highlight-lines="3 6">
           <code slot="code">  useEffect(() =&gt; {
     const id = setInterval(() =&gt; {
       setCount(count + 1);
@@ -911,7 +911,7 @@ function Counter() {
   }, [count]);</code>
         </deckgo-highlight-code>
 <p>为了实现这个目的，我们需要问自己一个问题：<strong>我们为什么要用<code>count</code>？</strong>可以看到我们只在<code>setCount</code>调用中用到了<code>count</code>。在这个场景中，我们其实并不需要在effect中使用<code>count</code>。当我们想要根据前一个状态更新状态的时候，我们可以使用<code>setState</code>的<a href="https://reactjs.org/docs/hooks-reference.html#functional-updates" target="_blank" rel="nofollow noopener noreferrer">函数形式</a>：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="3">
+<deckgo-highlight-code language="jsx"  highlight-lines="3">
           <code slot="code">  useEffect(() =&gt; {
     const id = setInterval(() =&gt; {
       setCount(c =&gt; c + 1);
@@ -933,7 +933,7 @@ function Counter() {
 <p><strong>然而，即使是<code>setCount(c => c + 1)</code>也并不完美。</strong>它看起来有点怪，并且非常受限于它能做的事。举个例子，如果我们有两个互相依赖的状态，或者我们想基于一个prop来计算下一次的state，它并不能做到。幸运的是， <code>setCount(c => c + 1)</code>有一个更强大的姐妹模式，它的名字叫<code>useReducer</code>。</p>
 <h2 id="解耦来自actions的更新"><a href="#%E8%A7%A3%E8%80%A6%E6%9D%A5%E8%87%AAactions%E7%9A%84%E6%9B%B4%E6%96%B0" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>解耦来自Actions的更新</h2>
 <p>我们来修改上面的例子让它包含两个状态：<code>count</code> 和 <code>step</code>。我们的定时器会每次在count上增加一个<code>step</code>值：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="7 10">
+<deckgo-highlight-code language="jsx"  highlight-lines="7 10">
           <code slot="code">function Counter() {
   const [count, setCount] = useState(0);
   const [step, setStep] = useState(1);
@@ -960,7 +960,7 @@ function Counter() {
 <p><strong>当你想更新一个状态，并且这个状态更新依赖于另一个状态的值时，你可能需要用<code>useReducer</code>去替换它们。</strong></p>
 <p>当你写类似<code>setSomething(something => ...)</code>这种代码的时候，也许就是考虑使用reducer的契机。reducer可以让你<strong>把组件内发生了什么(actions)和状态如何响应并更新分开表述。</strong></p>
 <p>我们用一个<code>dispatch</code>依赖去替换effect的<code>step</code>依赖：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="1 6 9">
+<deckgo-highlight-code language="jsx"  highlight-lines="1 6 9">
           <code slot="code">const [state, dispatch] = useReducer(reducer, initialState);
 const { count, step } = state;
 
@@ -976,7 +976,7 @@ useEffect(() =&gt; {
 <p>我们解决了问题!</p>
 <p><em>（你可以从依赖中去除<code>dispatch</code>, <code>setState</code>, 和<code>useRef</code>包裹的值因为React会确保它们是静态的。不过你设置了它们作为依赖也没什么问题。）</em></p>
 <p>相比于直接在effect里面读取状态，它dispatch了一个<em>action</em>来描述发生了什么。这使得我们的effect和<code>step</code>状态解耦。我们的effect不再关心怎么更新状态，它只负责告诉我们发生了什么。更新的逻辑全都交由reducer去统一处理:</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="8 9">
+<deckgo-highlight-code language="jsx"  highlight-lines="8 9">
           <code slot="code">const initialState = {
   count: 0,
   step: 1,
@@ -997,7 +997,7 @@ function reducer(state, action) {
 <h2 id="为什么usereducer是hooks的作弊模式"><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88usereducer%E6%98%AFhooks%E7%9A%84%E4%BD%9C%E5%BC%8A%E6%A8%A1%E5%BC%8F" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>为什么useReducer是Hooks的作弊模式</h2>
 <p>我们已经学习到如何移除effect的依赖，不管状态更新是依赖上一个状态还是依赖另一个状态。<strong>但假如我们需要依赖<em>props</em>去计算下一个状态呢？</strong>举个例子，也许我们的API是<code>&#x3C;Counter step={1} /></code>。确定的是，在这种情况下，我们没法避免依赖<code>props.step</code> 。是吗？</p>
 <p>实际上， 我们可以避免！我们可以把<em>reducer</em>函数放到组件内去读取props：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="1 6">
+<deckgo-highlight-code language="jsx"  highlight-lines="1 6">
           <code slot="code">function Counter({ step }) {
   const [count, dispatch] = useReducer(reducer, 0);
 
@@ -1025,7 +1025,7 @@ function reducer(state, action) {
 <p><strong>这就是为什么我倾向认为<code>useReducer</code>是Hooks的“作弊模式”。它可以把更新逻辑和描述发生了什么分开。结果是，这可以帮助我移除不必需的依赖，避免不必要的effect调用。</strong></p>
 <h2 id="把函数移到effects里"><a href="#%E6%8A%8A%E5%87%BD%E6%95%B0%E7%A7%BB%E5%88%B0effects%E9%87%8C" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>把函数移到Effects里</h2>
 <p>一个典型的误解是认为函数不应该成为依赖。举个例子，下面的代码看上去可以运行正常：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="13">
+<deckgo-highlight-code language="jsx"  highlight-lines="13">
           <code slot="code">function SearchResults() {
   const [data, setData] = useState({ hits: [] });
 
@@ -1045,7 +1045,7 @@ function reducer(state, action) {
 <p><em>(<a href="https://codesandbox.io/s/8j4ykjyv0" target="_blank" rel="nofollow noopener noreferrer">这个例子</a> 改编自Robin Wieruch这篇很棒的文章 — <a href="https://www.robinwieruch.de/react-hooks-fetch-data/" target="_blank" rel="nofollow noopener noreferrer">点击查看</a>！)</em></p>
 <p>需要明确的是，上面的代码可以正常工作。<strong>但这样做在组件日渐复杂的迭代过程中我们很难确保它在各种情况下还能正常运行。</strong></p>
 <p>想象一下我们的代码做下面这样的分离，并且每一个函数的体量是现在的五倍：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">function SearchResults() {
   // Imagine this function is long
   function getFetchUrl() {
@@ -1066,7 +1066,7 @@ function reducer(state, action) {
 }</code>
         </deckgo-highlight-code>
 <p>然后我们在某些函数内使用了某些state或者prop：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="6">
+<deckgo-highlight-code language="jsx"  highlight-lines="6">
           <code slot="code">function SearchResults() {
   const [query, setQuery] = useState(&#39;react&#39;);
 
@@ -1090,7 +1090,7 @@ function reducer(state, action) {
         </deckgo-highlight-code>
 <p>如果我们忘记去更新使用这些函数（很可能通过其他函数调用）的effects的依赖，我们的effects就不会同步props和state带来的变更。这当然不是我们想要的。</p>
 <p>幸运的是，对于这个问题有一个简单的解决方案。<strong>如果某些函数仅在effect中调用，你可以把它们的定义移到effect中：</strong></p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="4,12">
+<deckgo-highlight-code language="jsx"  highlight-lines="4,12">
           <code slot="code">function SearchResults() {
   // ...
   useEffect(() =&gt; {
@@ -1112,7 +1112,7 @@ function reducer(state, action) {
 <p>(<a href="https://codesandbox.io/s/04kp3jwwql" target="_blank" rel="nofollow noopener noreferrer">这里是demo</a>.)</p>
 <p>这么做有什么好处呢？我们不再需要去考虑这些“间接依赖”。我们的依赖数组也不再撒谎：<strong>在我们的effect中确实没有再使用组件范围内的任何东西。</strong></p>
 <p>如果我们后面修改 <code>getFetchUrl</code>去使用<code>query</code>状态，我们更可能会意识到我们正在effect里面编辑它 - 因此，我们需要把<code>query</code>添加到effect的依赖里：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="6 15">
+<deckgo-highlight-code language="jsx"  highlight-lines="6 15">
           <code slot="code">function SearchResults() {
   const [query, setQuery] = useState(&#39;react&#39;);
 
@@ -1141,7 +1141,7 @@ function reducer(state, action) {
 <p>有时候你可能不想把函数移入effect里。比如，组件内有几个effect使用了相同的函数，你不想在每个effect里复制黏贴一遍这个逻辑。也或许这个函数是一个prop。</p>
 <p>在这种情况下你应该忽略对函数的依赖吗？我不这么认为。再次强调，<strong>effects不应该对它的依赖撒谎。</strong>通常我们还有更好的解决办法。一个常见的误解是，“函数从来不会改变”。但是这篇文章你读到现在，你知道这显然不是事实。实际上，在组件内定义的函数每一次渲染都在变。</p>
 <p><strong>函数每次渲染都会改变这个事实本身就是个问题。</strong> 比如有两个effects会调用 <code>getFetchUrl</code>:</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">function SearchResults() {
   function getFetchUrl(query) {
     return &#39;https://hn.algolia.com/api/v1/search?query=&#39; + query;
@@ -1162,7 +1162,7 @@ function reducer(state, action) {
         </deckgo-highlight-code>
 <p>在这个例子中，你可能不想把<code>getFetchUrl</code> 移到effects中，因为你想复用逻辑。</p>
 <p>另一方面，如果你对依赖很“诚实”，你可能会掉到陷阱里。我们的两个effects都依赖<code>getFetchUrl</code>，<strong>而它每次渲染都不同</strong>，所以我们的依赖数组会变得无用：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="2,5">
+<deckgo-highlight-code language="jsx"  highlight-lines="2,5">
           <code slot="code">function SearchResults() {
   // 🔴 Re-triggers all effects on every render
   function getFetchUrl(query) {
@@ -1185,7 +1185,7 @@ function reducer(state, action) {
 <p>一个可能的解决办法是把<code>getFetchUrl</code>从依赖中去掉。但是，我不认为这是好的解决方式。这会使我们后面对数据流的改变很难被发现从而忘记去处理。这会导致类似于上面“定时器不更新值”的问题。</p>
 <p>相反的，我们有两个更简单的解决办法。</p>
 <p><strong>第一个， 如果一个函数没有使用组件内的任何值，你应该把它提到组件外面去定义，然后就可以自由地在effects中使用：</strong></p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="1,4">
+<deckgo-highlight-code language="jsx"  highlight-lines="1,4">
           <code slot="code">// ✅ Not affected by the data flow
 function getFetchUrl(query) {
   return &#39;https://hn.algolia.com/api/v1/search?query=&#39; + query;
@@ -1207,7 +1207,7 @@ function SearchResults() {
         </deckgo-highlight-code>
 <p>你不再需要把它设为依赖，因为它们不在渲染范围内，因此不会被数据流影响。它不可能突然意外地依赖于props或state。</p>
 <p>或者， 你也可以把它包装成 <a href="https://reactjs.org/docs/hooks-reference.html#usecallback" target="_blank" rel="nofollow noopener noreferrer"><code>useCallback</code> Hook</a>:</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="2,5">
+<deckgo-highlight-code language="jsx"  highlight-lines="2,5">
           <code slot="code">function SearchResults() {
   // ✅ Preserves identity when its own deps are the same
   const getFetchUrl = useCallback((query) =&gt; {
@@ -1230,7 +1230,7 @@ function SearchResults() {
 <p><code>useCallback</code>本质上是添加了一层依赖检查。它以另一种方式解决了问题 - <strong>我们使函数本身只在需要的时候才改变，而不是去掉对函数的依赖。</strong></p>
 <p>我们来看看为什么这种方式是有用的。之前，我们的例子中展示了两种搜索结果（查询条件分别为<code>'react'</code>和<code>'redux'</code>）。但如果我们想添加一个输入框允许你输入任意的查询条件(<code>query</code>)。不同于传递<code>query</code>参数的方式，现在<code>getFetchUrl</code>会从状态中读取。</p>
 <p>我们很快发现它遗漏了<code>query</code>依赖：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="5">
+<deckgo-highlight-code language="jsx"  highlight-lines="5">
           <code slot="code">function SearchResults() {
   const [query, setQuery] = useState(&#39;react&#39;);
   const getFetchUrl = useCallback(() =&gt; { // No query argument
@@ -1240,7 +1240,7 @@ function SearchResults() {
 }</code>
         </deckgo-highlight-code>
 <p>如果我把<code>query</code>添加到<code>useCallback</code> 的依赖中，任何调用了<code>getFetchUrl</code>的effect在<code>query</code>改变后都会重新运行：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="4,7">
+<deckgo-highlight-code language="jsx"  highlight-lines="4,7">
           <code slot="code">function SearchResults() {
   const [query, setQuery] = useState(&#39;react&#39;);
 
@@ -1259,7 +1259,7 @@ function SearchResults() {
         </deckgo-highlight-code>
 <p>我们要感谢<code>useCallback</code>，因为如果<code>query</code> 保持不变，<code>getFetchUrl</code>也会保持不变，我们的effect也不会重新运行。但是如果<code>query</code>修改了，<code>getFetchUrl</code>也会随之改变，因此会重新请求数据。这就像你在Excel里修改了一个单元格的值，另一个使用它的单元格会自动重新计算一样。</p>
 <p>这正是拥抱数据流和同步思维的结果。<strong>对于通过属性从父组件传入的函数这个方法也适用：</strong></p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="4,8">
+<deckgo-highlight-code language="jsx"  highlight-lines="4,8">
           <code slot="code">function Parent() {
   const [query, setQuery] = useState(&#39;react&#39;);
 
@@ -1285,7 +1285,7 @@ function Child({ fetchData }) {
 <p>因为<code>fetchData</code>只有在<code>Parent</code>的<code>query</code>状态变更时才会改变，所以我们的<code>Child</code>只会在需要的时候才去重新请求数据。</p>
 <h2 id="函数是数据流的一部分吗？"><a href="#%E5%87%BD%E6%95%B0%E6%98%AF%E6%95%B0%E6%8D%AE%E6%B5%81%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86%E5%90%97%EF%BC%9F" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>函数是数据流的一部分吗？</h2>
 <p>有趣的是，这种模式在class组件中行不通，并且这种行不通恰到好处地揭示了effect和生命周期范式之间的区别。考虑下面的转换：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="5,8 18,20">
+<deckgo-highlight-code language="jsx"  highlight-lines="5,8 18,20">
           <code slot="code">class Parent extends Component {
   state = {
     query: &#39;react&#39;
@@ -1312,7 +1312,7 @@ class Child extends Component {
 }</code>
         </deckgo-highlight-code>
 <p>你可能会想：“少来了Dan，我们都知道<code>useEffect</code> 就像<code>componentDidMount</code> 和 <code>componentDidUpdate</code>的结合，你不能老是破坏这一条！”<strong>好吧，就算加了<code>componentDidUpdate</code>照样无用：</strong></p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="8,13">
+<deckgo-highlight-code language="jsx"  highlight-lines="8,13">
           <code slot="code">class Child extends Component {
   state = {
     data: null
@@ -1332,20 +1332,20 @@ class Child extends Component {
 }</code>
         </deckgo-highlight-code>
 <p>当然如此，<code>fetchData</code>是一个class方法！（或者你也可以说是class属性 - 但这不能改变什么。）它不会因为状态的改变而不同，所以<code>this.props.fetchData</code>和 <code>prevProps.fetchData</code>始终相等，因此不会重新请求。那我们删掉条件判断怎么样？</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">  componentDidUpdate(prevProps) {
     this.props.fetchData();
   }</code>
         </deckgo-highlight-code>
 <p>等等，这样会在每次渲染后都去请求。(添加一个加载动画可能是一种有趣的发现这种情况的方式。)也许我们可以绑定一个特定的query?</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">  render() {
     return &lt;Child fetchData={this.fetchData.bind(this, this.state.query)} /&gt;;
   }</code>
         </deckgo-highlight-code>
 <p>但这样一来，<code>this.props.fetchData !== prevProps.fetchData</code> 表达式永远是<code>true</code>，即使<code>query</code>并未改变。这会导致我们总是去请求。</p>
 <p>想要解决这个class组件中的难题，唯一现实可行的办法是硬着头皮把<code>query</code>本身传入 <code>Child</code> 组件。 <code>Child</code> 虽然实际并没有直接<em>使用</em>这个<code>query</code>的值，但能在它改变的时候触发一次重新请求：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="10 22,24">
+<deckgo-highlight-code language="jsx"  highlight-lines="10 22,24">
           <code slot="code">class Parent extends Component {
   state = {
     query: &#39;react&#39;
@@ -1380,7 +1380,7 @@ class Child extends Component {
 <p><strong>在class组件中，函数属性本身并不是数据流的一部分。</strong>组件的方法中包含了可变的<code>this</code>变量导致我们不能确定无疑地认为它是不变的。因此，即使我们只需要一个函数，我们也必须把一堆数据传递下去仅仅是为了做“diff”。我们无法知道传入的<code>this.props.fetchData</code> 是否依赖状态，并且不知道它依赖的状态是否改变了。</p>
 <p><strong>使用<code>useCallback</code>，函数完全可以参与到数据流中。</strong>我们可以说如果一个函数的输入改变了，这个函数就改变了。如果没有，函数也不会改变。感谢周到的<code>useCallback</code>，属性比如<code>props.fetchData</code>的改变也会自动传递下去。</p>
 <p>类似的，<a href="https://reactjs.org/docs/hooks-reference.html#usememo" target="_blank" rel="nofollow noopener noreferrer"><code>useMemo</code></a>可以让我们对复杂对象做类似的事情。</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">function ColorPicker() {
   // Doesn&#39;t break Child&#39;s shallow equality prop check
   // unless the color actually changes.
@@ -1393,7 +1393,7 @@ class Child extends Component {
 <p>在上面的例子中，我更倾向于把<code>fetchData</code>放在我的effect里（它可以抽离成一个自定义Hook）或者是从顶层引入。我想让effects保持简单，而在里面调用回调会让事情变得复杂。（“如果某个<code>props.onComplete</code>回调改变了而请求还在进行中会怎么样？”）你可以<a href="#swimming-against-the-tide">模拟class的行为</a>但那样并不能解决竞态的问题。</p>
 <h2 id="说说竞态"><a href="#%E8%AF%B4%E8%AF%B4%E7%AB%9E%E6%80%81" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>说说竞态</h2>
 <p>下面是一个典型的在class组件里发请求的例子：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">class Article extends Component {
   state = {
     article: null
@@ -1409,7 +1409,7 @@ class Child extends Component {
 }</code>
         </deckgo-highlight-code>
 <p>你很可能已经知道，上面的代码埋伏了一些问题。它并没有处理更新的情况。所以第二个你能够在网上找到的经典例子是下面这样的：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="8,12">
+<deckgo-highlight-code language="jsx"  highlight-lines="8,12">
           <code slot="code">class Article extends Component {
   state = {
     article: null
@@ -1434,7 +1434,7 @@ class Child extends Component {
 <p>Effects并没有神奇地解决这个问题，尽管它会警告你如果你直接传了一个<code>async</code> 函数给effect。（我们会改善这个警告来更好地解释你可能会遇到的这些问题。）</p>
 <p>如果你使用的异步方式支持取消，那太棒了。你可以直接在清除函数中取消异步请求。</p>
 <p>或者，最简单的权宜之计是用一个布尔值来跟踪它：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="5 9 16,18">
+<deckgo-highlight-code language="jsx"  highlight-lines="5 9 16,18">
           <code slot="code">function Article({ id }) {
   const [article, setArticle] = useState(null);
 

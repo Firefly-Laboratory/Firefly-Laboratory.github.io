@@ -90,7 +90,7 @@
 <strong>这些技巧和你已经知道的内容是互补的</strong> 它们并不会替代<code>memo</code> 或者 <code>useMemo</code>，但是先试一试它们还是不错的</p>
 <h2 id="一个（人工）减缓的组件"><a href="#%E4%B8%80%E4%B8%AA%EF%BC%88%E4%BA%BA%E5%B7%A5%EF%BC%89%E5%87%8F%E7%BC%93%E7%9A%84%E7%BB%84%E4%BB%B6" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>一个（人工）减缓的组件</h2>
 <p>这里是一个具有严重渲染性能问题的组件</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  >
+<deckgo-highlight-code language="jsx"  >
           <code slot="code">import { useState } from &#39;react&#39;;
 
 export default function App() {
@@ -118,7 +118,7 @@ function ExpensiveTree() {
 两种不同的解决方案。</p>
 <h2 id="解法-1：-向下移动state"><a href="#%E8%A7%A3%E6%B3%95-1%EF%BC%9A-%E5%90%91%E4%B8%8B%E7%A7%BB%E5%8A%A8state" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>解法 1： 向下移动State</h2>
 <p>如果你仔细看一下渲染代码，你会注意到返回的树中只有一部分真正关心当前的<code>color</code>：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="2 5,6">
+<deckgo-highlight-code language="jsx"  highlight-lines="2 5,6">
           <code slot="code">export default function App() {
   let [color, setColor] = useState(&#39;red&#39;);
   return (
@@ -131,7 +131,7 @@ function ExpensiveTree() {
 }</code>
         </deckgo-highlight-code>
 <p>所以让我们把这一部分提取到<code>Form</code>组件中然后将state移动到该组件里：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="4 11 14 15">
+<deckgo-highlight-code language="jsx"  highlight-lines="4 11 14 15">
           <code slot="code">export default function App() {
   return (
     &lt;&gt;
@@ -155,7 +155,7 @@ function Form() {
 <p>现在如果<code>color</code>变化了，只有<code>Form</code>会重新渲染。问题解决了。</p>
 <h2 id="解法-2：内容提升"><a href="#%E8%A7%A3%E6%B3%95-2%EF%BC%9A%E5%86%85%E5%AE%B9%E6%8F%90%E5%8D%87" aria-hidden class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>解法 2：内容提升</h2>
 <p>当一部分state在高开销树的上层代码中使用时上述解法就无法奏效了。举个例子，如果我们将<code>color</code>放到父元素<code>div</code>中。</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="2 4">
+<deckgo-highlight-code language="jsx"  highlight-lines="2 4">
           <code slot="code">export default function App() {
   let [color, setColor] = useState(&#39;red&#39;);
   return (
@@ -175,7 +175,7 @@ function Form() {
 <p>…</p>
 <p>…</p>
 <p>答案显而易见：</p>
-<deckgo-highlight-code language="jsx" line-numbers="true"  highlight-lines="4 5 10 15">
+<deckgo-highlight-code language="jsx"  highlight-lines="4 5 10 15">
           <code slot="code">export default function App() {
   return (
     &lt;ColorPicker&gt;
