@@ -42,7 +42,7 @@ module.exports = {
           {
             resolve: 'gatsby-remark-highlight-code',
             options: {
-              lineNumbers: true
+              lineNumbers: false
             }
           },
           // {
