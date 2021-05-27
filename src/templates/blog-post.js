@@ -162,6 +162,7 @@ const BlogPost = ({ data }) => {
               <div className="table-of-contents">
                 <Anchor
                   className={'apiAnchor'}
+                  offsetTop={80}
                 >
                   {renderAnchorLinks(anchorLinks)}
                 </Anchor>
